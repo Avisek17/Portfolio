@@ -1,0 +1,157 @@
+.navbar{
+    background: rgba(15, 15, 35, 0.9);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px; // Full rounded corners like containers
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    display: flex;
+    position: fixed;
+    top: 0.5rem; // Add small top margin for better visual
+    left: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // Smooth transitions
+    animation: slideInFromTop 0.8s ease-out;
+    
+    // Add subtle hover effect for better interaction
+    &:hover {
+        background: rgba(15, 15, 35, 0.95);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        transform: translateY(-2px);
+    }
+    
+    @keyframes slideInFromTop {
+        from {
+            opacity: 0;
+            transform: translateY(-100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+ 
+   
+
+    &_container{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: inherit;
+        padding: 0px 20px;
+        flex: 1;
+
+        &_logo{
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+            }
+        }
+
+                &_menu{
+                display: flex;
+                list-style: none;
+                text-align: center;
+
+                &_item{
+                   line-height: 40px;
+                   margin-right: 1.5rem; 
+                   font-size: 1.6rem;
+                   position: relative;
+                   border-radius: 12px;
+                   transition: all 0.3s ease;
+
+                   &::after{
+                    content: '';
+                    position: absolute;
+                    bottom: -8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    height: 3px;
+                    width: 0;
+                    background: var(--gradient-accent);
+                    border-radius: 3px;
+                    transition: width 0.3s ease;
+                   }
+                   
+                    &:hover {
+                        &::after {
+                            width: 80%;
+                        }
+                    }                    &_links{
+                        color: var(--text-primary);
+                        text-decoration: none;
+                        padding: 1rem 1.5rem;
+                        border-radius: 12px;
+                        transition: color 0.3s ease;
+                        font-weight: 600;
+                        letter-spacing: 0.5px;
+                        position: relative;
+                        z-index: 2;
+                        
+                        // Active state styling
+                        &.active {
+                          background: var(--gradient-accent);
+                          color: white;
+                          box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+                        }
+                        
+                        &:hover {
+                          color: var(--accent-color);
+                        }
+                    }
+                   
+                }
+            }
+
+        
+    }        
+}
+.nav-icon{
+    display: none;
+}
+@media only screen and (max-width : 768px){
+    .navbar_container_menu{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        top: 80px;
+        left: -110%;
+        opacity: 1;
+        transition: all 0.5s ease;
+
+        &.active{
+            background: #181818;
+            left: 0px;
+            opacity: 1;
+        }
+        &_item{
+            border-bottom: 1px solid #282828;
+            margin:0px ;
+            padding: 20px 0px;
+        }
+    }
+    .nav-icon{
+        display: block;
+        cursor: pointer;
+        color: var(--yellow-theme-main-color);
+        padding-right: 20px;
+
+    }
+}

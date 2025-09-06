@@ -1,0 +1,283 @@
+
+.contact {
+  padding: 0 1rem 1rem 1rem;
+  
+  &__container {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 0;
+  }
+
+  &__title {
+    font-size: var(--fs-h1);
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  &__subtitle {
+  font-size: var(--fs-body-lg);
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem; // Reduced from 4rem
+    align-items: start;
+  }
+
+  &__section-title {
+  font-size: var(--fs-h3);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  &__description {
+  font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+  }
+
+  &__info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  &__info-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateX(5px);
+    }
+  }
+
+  &__info-icon {
+    font-size: 2rem;
+    min-width: 2rem;
+    text-align: center;
+  }
+
+  &__info-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__info-title {
+  font-size: var(--fs-body);
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  &__info-value {
+  font-size: var(--fs-body);
+    color: var(--text-muted);
+    opacity: 0.95;
+  }
+
+  &__social {
+    margin-top: 2rem;
+  }
+
+  &__social-title {
+  font-size: var(--fs-h4);
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+  }
+
+  &__social-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.03);
+    }
+  }
+
+  &__social-icon {
+    font-size: 1.5rem;
+  }
+
+  &__social-name {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  &__form-wrapper {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input,
+  &__textarea {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+  }
+
+  &__submit-btn {
+    /* Button visuals unified in App.scss */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__admin-notice {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .contact {
+    padding: 1rem 0.5rem;
+
+    &__title {
+      font-size: 2.5rem;
+    }
+
+    &__subtitle {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+    }
+
+    &__content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    &__section-title {
+      font-size: 2rem;
+    }
+
+    &__social-links {
+      grid-template-columns: 1fr;
+    }
+
+    &__form-wrapper {
+      padding: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__info-item {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    &__form-wrapper {
+      padding: 1rem;
+    }
+
+    &__input,
+    &__textarea {
+      font-size: 1.3rem;
+    }
+  }
+}

@@ -1,0 +1,513 @@
+// Import Google Fonts: Inter and Poppins
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+// Removed unused font-face rules for problematic fonts
+
+:root {
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica', Arial;
+  --font-heading: 'Poppins', var(--font-ui);
+  --font-decor: var(--font-ui);
+
+  --base-font-size: 12px;
+
+  /* Responsive type scale (clamp for fluid sizing) */
+  --fs-display: clamp(2.4rem, 5.5vw, 3.1rem);
+  --fs-h1: clamp(2.1rem, 4.8vw, 2.7rem);
+  --fs-h2: clamp(1.7rem, 3.6vw, 2.2rem);
+  --fs-h3: clamp(1.3rem, 2.4vw, 1.6rem);
+  --fs-h4: 1.2rem;
+  --fs-body-lg: 1.05rem;
+  --fs-body: 0.95rem;
+  --fs-small: 0.8rem;
+
+  --bg-gradient-start: #060618;
+  --bg-gradient-mid: #0f1b3a;
+  --bg-gradient-end: #081028;
+
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  --card-border: rgba(255,255,255,0.08);
+
+  --text-primary: #eef2ff;
+  --text-muted: #bfcfe6;
+
+  --accent-color: #ff6b6b;
+  --accent-color-2: #4ecdc4;
+  --accent-color-3: #45b7d1;
+  --accent-color-4: #96ceb4;
+  --accent-gradient: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-2) 50%, var(--accent-color-3) 100%);
+  --accent-glow: rgba(255,107,107,0.2);
+
+  --card-shadow: 0 15px 35px rgba(2,6,23,0.4);
+
+  --dur-fast: 180ms;
+  --dur: 280ms;
+  --dur-slow: 480ms;
+}
+
+html { font-size: var(--base-font-size); box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+body {
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  background: 
+    radial-gradient(1200px 600px at 10% 10%, rgba(255,107,107,0.08), transparent 8%),
+    radial-gradient(1000px 500px at 90% 80%, rgba(77,205,196,0.06), transparent 10%),
+    radial-gradient(800px 400px at 50% 50%, rgba(69,183,209,0.04), transparent 12%),
+    linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Single-page layout utilities */
+.single-page__sections {
+  scroll-behavior: smooth;
+}
+
+.single-page__section {
+  scroll-margin-top: 90px; /* account for fixed navbar */
+  padding-top: 2rem; /* visual breathing */
+}
+
+/* Section reveal animation (entry on scroll) */
+.single-page__section.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: opacity, transform;
+  transition:
+    opacity var(--dur-slow) var(--ease-emphasis),
+    transform var(--dur-slow) var(--ease-emphasis);
+  transition-delay: var(--reveal-delay, 0ms);
+  /* Slight GPU promotion for smoother start */
+  backface-visibility: hidden;
+}
+
+.single-page__section.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced motion: disable transitions & ensure visible */
+@media (prefers-reduced-motion: reduce) {
+  .single-page__section.reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+.navbar__scroll-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 20px rgba(2,6,23,0.45);
+}
+
+// Improve heading weight and spacing for visual hierarchy
+h1 { font-size: var(--fs-h1); font-weight: 700; }
+h2 { font-size: var(--fs-h2); font-weight: 600; }
+h3 { font-size: var(--fs-h3); font-weight: 600; }
+h4 { font-size: var(--fs-h4); }
+
+/* Utility classes */
+.text-display { font-size: var(--fs-display); line-height: 1.05; }
+.text-h1 { font-size: var(--fs-h1); }
+.text-h2 { font-size: var(--fs-h2); }
+.text-h3 { font-size: var(--fs-h3); }
+.text-small { font-size: var(--fs-small); }
+
+p { color: var(--text-muted); margin: 0 0 1rem 0; }
+
+a { color: var(--accent-color); text-decoration: none; transition: color var(--dur-quick) var(--ease-standard), text-shadow var(--dur-quick) var(--ease-standard); }
+a:hover { color: var(--accent-color-2); text-shadow: 0 6px 18px rgba(6,182,212,0.12); }
+
+button, .admin-btn { font-family: var(--font-ui); border-radius: calc(var(--radius) / 1.2); border: none; cursor: pointer; }
+
+input, textarea, select { font-family: var(--font-ui); color: var(--text-primary); background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.03); padding: 0.6rem 0.75rem; border-radius: 8px; }
+
+/* Shared card and hover rules */
+.portfolio__card, .certificate-card, .resume-item, .skills__item, .contact__info-item { border-radius: var(--radius); }
+
+.App {
+  // Remove any default padding that pushes content down
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  position: relative;
+  overflow: hidden; // Prevent scrolling on the main app
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  
+  // Simple particles background replacement
+  .particles-bg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    opacity: 0.6;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 1px, transparent 1px),
+      radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 1px, transparent 1px),
+      radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 100px 100px, 150px 150px, 200px 200px;
+    animation: float 20s ease-in-out infinite;
+  }
+  
+  // Keep original particles styling for compatibility
+  #particles {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: -1 !important; // Keep particles behind all content
+    pointer-events: none !important; // Prevent particles from blocking interactions
+    opacity: 0.6; // Make particles more subtle
+  }
+  
+  .page-content {
+    padding-top: 95px; // Increased to account for navbar top margin (80px height + 8px top + 7px extra)
+    height: calc(100vh - 95px); // Adjusted height accordingly
+    overflow-y: auto; // Allow scrolling within page content if needed
+    overflow-x: hidden; // Prevent horizontal scrolling
+    box-sizing: border-box;
+    position: relative; // Ensure content appears above particles
+    z-index: 1; // Keep content above particles
+    -webkit-backdrop-filter: blur(10px); // Safari support
+    backdrop-filter: blur(10px); // Add glass effect
+    scroll-behavior: smooth; // Smooth scrolling within content
+    
+    // Smooth page transitions
+    & > * {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    // Custom scrollbar styling for better aesthetics
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin: 10px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: var(--gradient-accent);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: var(--gradient-primary);
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+      }
+    }
+  }
+  
+  // Page transition animation
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  // Floating particles animation
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+}
+
+/* Unified page container and typography for core pages */
+.home__container,
+.portfolio__container,
+.skills__container,
+.contact__container,
+.resume-container,
+.resume__container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.25rem 1.25rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+  color: #e6eef8;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* Consistent page title & subtitle spacing */
+.home__container h1,
+.portfolio__container h2,
+.skills__container h2,
+.contact__container h2,
+.resume-container h2,
+.resume__container h2,
+.portfolio__title,
+.skills__title,
+.contact__title,
+.resume__title {
+  color: #f8fafc;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.home__container p,
+.portfolio__container p,
+.skills__container p,
+.contact__container p,
+.resume-container p,
+.resume__container p {
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+/* Ensure consistent inner grids/wrappers take full width */
+.portfolio__grid,
+.skills__grid,
+contact__content,
+.resume-list,
+.resume__grid,
+.skills__certificates-grid {
+  width: 100%;
+}
+
+/* Make images and cards responsive inside shared containers */
+.portfolio__card,
+.certificate-card,
+.resume-item,
+.skills__certificate-card,
+.resume__card {
+  background: transparent;
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.portfolio__card-image,
+.certificate-card__image img,
+.skills__certificate-image img,
+.home__profile-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Unified card hover + sheen effect for portfolio, skills, resume, certificates */
+/* Enhanced card and hover effects matching home page */
+/* Refined transitions: avoid 'all' to reduce unnecessary paints */
+.portfolio__card, .certificate-card, .resume-item, .skills__item, .contact__info-item, .skills__certificate-card, .resume__card {
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(8,10,30,0.3);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  transition:
+    transform var(--dur) var(--ease-emphasis),
+    box-shadow var(--dur) var(--ease-standard),
+    background var(--dur) var(--ease-standard),
+    border-color var(--dur) var(--ease-standard);
+  position: relative;
+  overflow: hidden;
+
+  /* Enhanced sheen effect */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255,107,107,0.1), 
+      rgba(77,205,196,0.08), 
+      transparent
+    );
+    transform: skewX(-15deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 40px rgba(2,6,23,0.5),
+      0 0 30px rgba(255,107,107,0.1),
+      0 0 60px rgba(77,205,196,0.05);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    border-color: rgba(255,107,107,0.2);
+
+    &::before {
+      left: 100%;
+      opacity: 1;
+    }
+  }
+}
+
+.portfolio__card::before,
+.certificate-card::before,
+.resume-item::before,
+.skills__item::before,
+.contact__info-item::before,
+.skills__certificate-card::before,
+.resume__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  transform: skewX(-15deg);
+  transition: left var(--dur-fast) var(--ease-standard), opacity var(--dur-fast) var(--ease-standard);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.portfolio__card:hover,
+.certificate-card:hover,
+.resume-item:hover,
+.skills__item:hover,
+.contact__info-item:hover,
+.skills__certificate-card:hover,
+.resume__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(2,6,23,0.6), 0 0 20px rgba(124,58,237,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.015));
+}
+
+.portfolio__card:hover::before,
+.certificate-card:hover::before,
+.resume-item:hover::before,
+.skills__item:hover::before,
+.contact__info-item:hover::before,
+.skills__certificate-card:hover::before,
+.resume__card:hover::before {
+  left: 100%;
+  opacity: 1;
+}
+
+/* Enhanced buttons matching home page style */
+.btn--primary,
+.portfolio__btn--demo,
+.portfolio__btn--code,
+.resume__btn,
+.skills__certificate-link,
+.contact__submit-btn {
+  background: var(--accent-gradient);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  box-shadow: 0 8px 25px rgba(255,107,107,0.25);
+  border: 2px solid transparent;
+  transition:
+    transform var(--dur) var(--ease-emphasis),
+    box-shadow var(--dur) var(--ease-standard),
+    filter var(--dur) var(--ease-standard),
+    background var(--dur) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--dur-slow) var(--ease-standard);
+    transform: skew(-20deg);
+  }
+
+  &:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(255,107,107,0.4);
+    filter: brightness(1.1);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(1.01);
+  }
+}
+
+/* Unified text colors */
+h1, h2, h3, h4, h5, .portfolio__card-title, .skills__category-title, .resume-item h4 {
+  color: var(--text-primary);
+}
+
+p, .portfolio__card-description, .skills__subtitle, .resume-item__designation {
+  color: var(--text-muted);
+}
+
+.lead { font-size: calc(var(--base-font-size) * 1.05); color: var(--text-primary); }
+
+.page-hero-title {
+  font-family: var(--font-decor);
+  font-size: calc(var(--base-font-size) * 3.25);
+  color: white;
+  letter-spacing: -0.02em;
+  text-shadow: 0 10px 40px rgba(7,12,30,0.6);
+}
+
+/* Improve badge/label look for resume designation */
+.resume-item__designation {
+  display: inline-block;
+  background: linear-gradient(90deg, rgba(124,58,237,0.12), rgba(6,182,212,0.08));
+  color: var(--text-primary);
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+@media (max-width: 900px) {
+  .home__container,
+  .portfolio__container,
+  .skills__container,
+  .contact__container,
+  .resume-container {
+    padding: 1.25rem;
+    margin: 0.75rem;
+  }
+}

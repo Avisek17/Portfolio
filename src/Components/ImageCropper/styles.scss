@@ -1,0 +1,159 @@
+@use 'sass:color';
+
+.image-cropper {
+  background-color: #272727;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  width: 650px;
+  animation: cropperFadeIn 0.4s ease-out;
+  transform-origin: center;
+  
+  &__header {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  &__title {
+    font-size: 1.5rem;
+    color: var(--yellow-theme-main-color);
+    margin: 0 0 8px 0;
+    text-align: center;
+  }
+  
+  &__subtitle {
+    font-size: 0.9rem;
+    color: var(--yellow-theme-sub-text-color);
+    margin: 0 0 15px 0;
+    opacity: 0.8;
+    text-align: center;
+  }
+  
+  &__content {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+    .ReactCrop {
+      max-height: 400px;
+      max-width: 100%;
+      background-color: #1d1d1d;
+      border-radius: 4px;
+      
+      &__crop-selection {
+        border: 2px solid var(--yellow-theme-main-color);
+      }
+      
+      &__drag-handle::after {
+        background-color: var(--yellow-theme-main-color);
+      }
+    }
+  }
+  
+  &__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  &__info {
+    font-size: 0.85rem;
+    color: var(--yellow-theme-sub-text-color);
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  &__buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  &__button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &--primary {
+      background-color: var(--yellow-theme-main-color);
+      color: #121212;
+      border: none;
+      
+      &:hover {
+        background-color: color.adjust(#ffdd40, $lightness: -10%);
+      }
+      
+      &:disabled {
+        background-color: #555;
+        color: #888;
+        cursor: not-allowed;
+      }
+    }
+    
+    &--secondary {
+      background-color: transparent;
+      color: var(--yellow-theme-sub-text-color);
+      border: 1px solid #444;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+    
+    &--original {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      
+      &:hover {
+        background-color: #1d4ed8;
+      }
+    }
+  }
+  
+  // Modal specific styles when used in a modal
+  &-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: modalFadeIn 0.3s ease;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    
+    .image-cropper {
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  }
+}
+
+@keyframes cropperFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
